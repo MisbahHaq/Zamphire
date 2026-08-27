@@ -1,0 +1,48 @@
+rules_version = '2';
+
+// ── REPRESENT — Firestore security rules (DEV) ──
+// NOTE: These are permissive dev rules. Before production, restrict
+// product/order/support writes to admin users (use Firebase Auth custom
+// claims or a `role` check against the users collection).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Products: public read, any signed-in user can write (tighten for prod)
+    match /products/{id} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // Orders & Support: signed-in users can read/write their scope
+    match /orders/{id} {
+      allow read, write: if request.auth != null;
+    }
+    match /support/{id} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Per-user cart / bookmarks / recent keyed by uid (or guest_* id)
+    match /carts/{uid} {
+      allow read, write: if request.auth != null || uid.matches('guest_.*');
+    }
+    match /bookmarks/{uid} {
+      allow read, write: if request.auth != null || uid.matches('guest_.*');
+    }
+    match /recent/{uid} {
+      allow read, write: if request.auth != null || uid.matches('guest_.*');
+    }
+
+    // Users: a user can read all and write only their own doc
+    match /users/{uid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == uid;
+    }
+
+    // Counters: authenticated writes only
+    match /counters/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+  }
+}
