@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="container-fluid px-4 px-lg-5" style={{ maxWidth: 1400 }}>
         <div className="row g-4 gx-0" style={{ borderTop: '1px solid #222', paddingTop: '3rem' }}>
           <div className="col-12 col-lg-4 mb-4 mb-lg-0">
-            <h2 className="m-0 mb-4" style={{ fontSize: '0.85rem', fontWeight: 200, letterSpacing: '0.35em', textTransform: 'uppercase' }}>Represent</h2>
+             <h2 className="m-0 mb-4" style={{ fontSize: '0.85rem', fontWeight: 200, letterSpacing: '0.35em', textTransform: 'uppercase' }}>Zamphire</h2>
             <p className="m-0" style={{ maxWidth: 340, fontSize: '0.8rem', fontWeight: 300, color: '#777', lineHeight: 1.8, letterSpacing: '0.03em' }}>
               Sign up to receive exclusive access to new drops, restocks and members-only releases.
             </p>
@@ -28,7 +28,7 @@ export default function Footer() {
           </div>
           <div className="col-12 mt-5 pt-4">
             <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-              <p className="text-caption m-0" style={{ color: '#444', fontSize: '0.75rem' }}>© 2026 Represent. All rights reserved.</p>
+               <p className="text-caption m-0" style={{ color: '#444', fontSize: '0.75rem' }}>© 2026 Zamphire. All rights reserved.</p>
               <div className="d-flex gap-4" style={{ fontSize: '0.75rem' }}>
                 <a href="#" className="text-decoration-none" style={{ color: '#555' }}>Terms</a>
                 <a href="#" className="text-decoration-none" style={{ color: '#555' }}>Privacy</a>

@@ -28,7 +28,7 @@ export default function Login() {
   return (
     <div className="auth-page">
       <div className="auth-left d-none d-lg-flex flex-column justify-content-center align-items-start p-5" style={{ flex: '1 1 50%' }}>
-        <h1 style={{ fontSize: 'clamp(2.5rem,5vw,4.5rem)', fontWeight: 200, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Represent</h1>
+         <h1 style={{ fontSize: 'clamp(2.5rem,5vw,4.5rem)', fontWeight: 200, letterSpacing: '0.1em', textTransform: 'uppercase' }}>Zamphire</h1>
         <p style={{ color: '#888', maxWidth: 360, lineHeight: 1.8 }}>Sign in to access your bag, order history and member-only drops.</p>
       </div>
       <div className="auth-form-side d-flex flex-column justify-content-center p-4 p-lg-5" style={{ flex: '1 1 50%', maxWidth: 620 }}>

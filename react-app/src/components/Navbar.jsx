@@ -55,7 +55,7 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <Link className="navbar-brand position-absolute start-50 translate-middle-x text-white m-0" style={{ letterSpacing: '0.35em', fontSize: '0.78rem', fontWeight: 200, textTransform: 'uppercase', zIndex: 20 }} to="/">Represent</Link>
+         <Link className="navbar-brand position-absolute start-50 translate-middle-x text-white m-0" style={{ letterSpacing: '0.35em', fontSize: '0.78rem', fontWeight: 200, textTransform: 'uppercase', zIndex: 20 }} to="/">Zamphire</Link>
 
         <div className="d-lg-none d-flex align-items-center" style={{ gap: '0.25rem', zIndex: 11 }}>
           <Link to={loginHref} className="icon-btn" id="userLoginLinkMobile">

@@ -105,7 +105,7 @@ export default function Chatbot() {
     <div className="chatbot-widget">
       <div className={`chatbot-panel ${open ? 'open' : ''}`} aria-hidden={!open}>
         <div className="chatbot-header">
-          <strong>Represent Assistant</strong>
+          <strong>Zamphire Assistant</strong>
           <button type="button" className="chatbot-close" aria-label="Close chatbot" onClick={() => setOpen(false)}>×</button>
         </div>
         <div className="chatbot-messages" ref={messagesRef}>

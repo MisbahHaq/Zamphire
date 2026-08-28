@@ -30,7 +30,7 @@ export function formatDate(iso) {
 }
 
 export const storeConfig = {
-  name: import.meta.env.VITE_STORE_NAME || 'Represent B',
+  name: import.meta.env.VITE_STORE_NAME || 'Zamphire',
   iban: import.meta.env.VITE_STORE_IBAN || ''
 };
 

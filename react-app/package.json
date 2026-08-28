@@ -3,7 +3,7 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
-  "description": "Represent B — React (Vite) port of the ASP.NET Core MVC e-commerce store",
+  "description": "Zamphire — React (Vite) e-commerce store",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

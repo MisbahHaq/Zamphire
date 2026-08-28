@@ -11,11 +11,11 @@ const SORTS = [
 ];
 
 export default function Men() {
-  return <Catalog gender="Men" title="Men" hero="/assets/first-pic.png" />;
+  return <Catalog gender="Men" title="Men" hero="/assets/Perfume-Men-7.jpg" />;
 }
 
 export function Women() {
-  return <Catalog gender="Women" title="Women" hero="/assets/woman.jpg" />;
+  return <Catalog gender="Women" title="Women" hero="/assets/Perfume-Women-2.webp" />;
 }
 
 function Catalog({ gender, title, hero }) {

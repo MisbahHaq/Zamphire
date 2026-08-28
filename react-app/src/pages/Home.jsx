@@ -11,7 +11,7 @@ export default function Home() {
     <div className="home-page">
       <section className="home-hero">
         <div className="home-hero-copy">
-          <p className="home-kicker">Represent / New Season</p>
+          <p className="home-kicker">Zamphire / New Season</p>
           <h1 className="home-hero-title">Quiet luxury with a sharper edge</h1>
           <p className="home-hero-lede">A refined edit of menswear, womenswear and statement pieces built around clean silhouettes, premium textures and everyday confidence.</p>
           <div className="home-hero-actions">
@@ -22,10 +22,10 @@ export default function Home() {
         </div>
         <div className="home-hero-visual-grid">
           <div className="hero-visual-card hero-visual-card-large">
-            <img src="/assets/second-pic-main.png" alt="Represent editorial fashion look" loading="eager" />
+            <img src="/assets/Perfume-13.jpg" alt="Zamphire editorial fashion look" loading="eager" />
           </div>
           <div className="hero-visual-card">
-            <img src="/assets/man.png" alt="Represent men collection" loading="lazy" />
+            <img src="/assets/Perfume-8.jpg" alt="Zamphire men collection" loading="lazy" />
           </div>
           <div className="hero-visual-card hero-visual-note">
             <strong>New drops weekly</strong>
@@ -70,11 +70,11 @@ export default function Home() {
           </div>
           <div className="category-grid">
             <Link to="/men" className="category-card category-card-wide">
-              <img src="/assets/first-pic.png" alt="Shop men collection" loading="lazy" />
+              <img src="/assets/Perfume-Men-1.jpg" alt="Shop men collection" loading="lazy" />
               <div className="category-card-content"><span>Men</span><strong>Sharp essentials</strong></div>
             </Link>
             <Link to="/women" className="category-card">
-              <img src="/assets/woman.jpg" alt="Shop women collection" loading="lazy" />
+              <img src="/assets/Perfume-Women-1.jpg" alt="Shop women collection" loading="lazy" />
               <div className="category-card-content"><span>Women</span><strong>Modern forms</strong></div>
             </Link>
             <Link to="/vault" className="category-card">
