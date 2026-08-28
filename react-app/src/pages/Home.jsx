@@ -95,7 +95,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="home-section home-section-white">
+      <section className="home-section home-section-white newsletter-section">
         <div className="section-shell">
           <div className="newsletter-panel">
             <div>
