@@ -8,7 +8,6 @@ function debugLog(msg) {
     arr.push(new Date().toISOString().slice(11, 23) + ' ' + msg);
     localStorage.setItem(DEBUG_KEY, JSON.stringify(arr.slice(-30)));
   } catch { /* ignore */ }
-  console.log('[route] ' + msg);
 }
 
 export default function ProtectedRoute({ children, adminOnly = false }) {

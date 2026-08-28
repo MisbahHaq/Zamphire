@@ -34,7 +34,6 @@ function debugLog(msg) {
     arr.push(new Date().toISOString().slice(11, 23) + ' ' + msg);
     localStorage.setItem(AUTH_DEBUG, JSON.stringify(arr.slice(-30)));
   } catch { /* ignore */ }
-  console.log('[auth] ' + msg);
 }
 
 function loadCachedUser() {
@@ -133,7 +132,7 @@ export function AuthProvider({ children }) {
       return r;
     } catch (e) { return { ok: false, error: authError(e) }; }
   };
-  const logout = async () => { console.log('[auth] logout() called'); await fbLogout(); setUser(null); cacheUser(null); };
+  const logout = async () => { await fbLogout(); setUser(null); cacheUser(null); };
 
   const updateProfile = async ({ name, address, dateOfBirth }) => {
     if (!user) return;

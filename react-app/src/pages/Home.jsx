@@ -13,7 +13,7 @@ export default function Home() {
         <div className="home-hero-copy">
           <p className="home-kicker">Zamphire / New Season</p>
           <h1 className="home-hero-title">Quiet luxury with a sharper edge</h1>
-          <p className="home-hero-lede">A refined edit of menswear, womenswear and statement pieces built around clean silhouettes, premium textures and everyday confidence.</p>
+          <p className="home-hero-lede">A refined edit of signature scents, unisex fragrances, and statement extraits built around complex accords, lasting concentration, and subtle presence.</p>
           <div className="home-hero-actions">
             <Link className="home-btn home-btn-light" to="/men">Shop Men</Link>
             <Link className="home-btn home-btn-light" to="/women">Shop Women</Link>
@@ -88,9 +88,9 @@ export default function Home() {
       <section className="home-section">
         <div className="section-shell">
           <div className="feature-grid">
-            <div className="feature-tile"><span>Build</span><strong>Clean structure</strong><p>Every layout uses consistent spacing, strong image hierarchy and responsive grid columns.</p></div>
-            <div className="feature-tile"><span>Texture</span><strong>Premium finish</strong><p>Large visuals, restrained typography and neutral backgrounds keep the focus on the product.</p></div>
-            <div className="feature-tile"><span>Motion</span><strong>Subtle depth</strong><p>Hover states and scaled imagery add polish without slowing down the browsing experience.</p></div>
+            <div className="feature-tile"><span>Formulation</span><strong>Clean composition</strong><p>Every scent uses balanced pyramids, high-concentration oils and enduring scent trails.</p></div>
+            <div className="feature-tile"><span>Sillage</span><strong>Premium finish</strong><p>Rich accords, restrained design and subtle trails keep the focus on the scent.</p></div>
+            <div className="feature-tile"><span>Diffusion</span><strong>Subtle depth</strong><p>Top notes and lingering trails add presence without overpowering the immediate experience.</p></div>
           </div>
         </div>
       </section>
