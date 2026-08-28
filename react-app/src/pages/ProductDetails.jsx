@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { getImages, getTags, getColors, money } from '../store';
+import { getImages, getTags, money } from '../store';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useBookmarks } from '../context/BookmarkContext';
@@ -20,19 +20,16 @@ export default function ProductDetails() {
 
   const images = useMemo(() => (product ? getImages(product) : []), [product]);
   const tags = useMemo(() => (product ? getTags(product) : []), [product]);
-  const colors = useMemo(() => (product ? getColors(product) : []), [product]);
   const sizes = useMemo(() => (tags.indexOf('accessories') !== -1 ? ['One Size'] : ['S', 'M', 'L']), [tags]);
 
   const [mainImage, setMainImage] = useState(images[0]);
   const [selectedSize, setSelectedSize] = useState('');
-  const [selectedColor, setSelectedColor] = useState(colors[0] || '');
   const [bookmarked, setBookmarked] = useState(product ? has(product.id) : false);
 
   useEffect(() => {
     if (product) {
       pushRecent(product.id);
       setMainImage(images[0]);
-      setSelectedColor(colors[0] || '');
       setSelectedSize('');
       setBookmarked(has(product.id));
     }
@@ -55,9 +52,8 @@ export default function ProductDetails() {
   );
 
   const updateCta = () => {
-    if (selectedSize && selectedColor) return 'ADD TO BAG — ' + selectedSize + ' / ' + selectedColor;
-    if (selectedColor) return 'ADD TO BAG — ' + selectedColor;
-    return 'Select Size And Color';
+    if (selectedSize) return 'ADD TO BAG — ' + selectedSize;
+    return 'Select Size';
   };
 
   const onBookmark = (e) => {
@@ -72,8 +68,7 @@ export default function ProductDetails() {
 
   const onAddToBag = () => {
     if (!selectedSize) { window.alert('Please choose a size.'); return; }
-    if (!selectedColor) { window.alert('Please choose a color.'); return; }
-    addToCart(product.id, selectedSize, selectedColor, 1);
+    addToCart(product.id, selectedSize, '', 1);
     window.alert('Added to bag.');
   };
 
@@ -116,14 +111,7 @@ export default function ProductDetails() {
               ))}
             </div>
 
-            <div className="section-editorial-caption">Color options</div>
-            <div className="color-flex-row">
-              {colors.map((c, i) => (
-                <button key={c} type="button" className={`brutalist-btn color-btn ${selectedColor === c ? 'selected-option' : ''}`} style={{ minWidth: 80 }} onClick={() => setSelectedColor(c)}>{c}</button>
-              ))}
-            </div>
-
-            <button className="velora-monolith-cta" onClick={onAddToBag}>{updateCta()}</button>
+             <button className="velora-monolith-cta" onClick={onAddToBag}>{updateCta()}</button>
 
             <div className="product-fine-print">
               <div>Model details: 185cm architecture wearing dynamic size Medium</div>

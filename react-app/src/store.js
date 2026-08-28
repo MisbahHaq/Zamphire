@@ -59,9 +59,6 @@ export function getImages(p) {
 export function getTags(p) {
   return String(p.tags || '').split(',').map((t) => t.trim()).filter(Boolean);
 }
-export function getColors(p) {
-  return String(p.colors || '').split(',').map((c) => c.trim()).filter(Boolean);
-}
 
 export function bestSellers(products, n) {
   const all = products || [];
