@@ -14,11 +14,14 @@ export default function Checkout() {
     lastName: user?.name?.split(' ').slice(1).join(' ') || '',
     email: user?.email || '',
     address: user?.address || '',
-    country: '',
+    country: 'Pakistan',
     city: '',
+    state: '',
+    postcode: '',
     phone: '',
+    notes: '',
     deliveryMethod: 'standard',
-    paymentMethod: 'card'
+    paymentMethod: 'cod'
   });
 
   if (items.length === 0) {
@@ -32,13 +35,14 @@ export default function Checkout() {
   const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
   const deliveryFee = form.deliveryMethod === 'express' ? 500 : 0;
-  const paymentFee = form.paymentMethod === 'cod' ? 800 : 0;
-  const total = subtotal + deliveryFee + paymentFee;
+  const total = subtotal + deliveryFee;
 
   const valid = Boolean(
     form.address.trim() &&
     form.country.trim() &&
     form.city.trim() &&
+    form.state.trim() &&
+    form.postcode.trim() &&
     form.phone.trim()
   );
 
@@ -52,7 +56,10 @@ export default function Checkout() {
       address: form.address,
       country: form.country,
       city: form.city,
+      state: form.state,
+      postcode: form.postcode,
       phoneNumber: form.phone,
+      notes: form.notes,
       deliveryMethod: form.deliveryMethod,
       paymentMethod: form.paymentMethod,
       totalAmount: +total.toFixed(2),
@@ -120,21 +127,41 @@ export default function Checkout() {
                 </div>
 
                 <div className="col-6">
-                  <label className="checkout-field-label">Country / Region *</label>
+                  <label className="checkout-field-label">Country</label>
                   <input
                     className="checkout-input"
-                    value={form.country}
-                    onChange={set('country')}
+                    value="Pakistan"
+                    disabled
+                    readOnly
+                  />
+                </div>
+
+                <div className="col-6">
+                  <label className="checkout-field-label">Town / City *</label>
+                  <input
+                    className="checkout-input"
+                    value={form.city}
+                    onChange={set('city')}
                     required
                   />
                 </div>
 
                 <div className="col-6">
-                  <label className="checkout-field-label">City *</label>
+                  <label className="checkout-field-label">State *</label>
                   <input
                     className="checkout-input"
-                    value={form.city}
-                    onChange={set('city')}
+                    value={form.state}
+                    onChange={set('state')}
+                    required
+                  />
+                </div>
+
+                <div className="col-6">
+                  <label className="checkout-field-label">Postcode *</label>
+                  <input
+                    className="checkout-input"
+                    value={form.postcode}
+                    onChange={set('postcode')}
                     required
                   />
                 </div>
@@ -146,6 +173,17 @@ export default function Checkout() {
                     value={form.phone}
                     onChange={set('phone')}
                     required
+                  />
+                </div>
+
+                <div className="col-12">
+                  <label className="checkout-field-label">Notes</label>
+                  <textarea
+                    className="checkout-input"
+                    value={form.notes}
+                    onChange={set('notes')}
+                    rows="3"
+                    style={{ resize: 'vertical' }}
                   />
                 </div>
               </div>
@@ -177,7 +215,7 @@ export default function Checkout() {
                     >
                       {m === 'standard'
                         ? 'Standard (Free)'
-                        : 'Express (+$500)'}
+                        : 'Express (+₨500)'}
                     </span>
                   </label>
                 ))}
@@ -186,7 +224,7 @@ export default function Checkout() {
               <h3 className="checkout-section-title">Payment</h3>
 
               <div>
-                {['card', 'cod', 'online'].map((m) => (
+                {['cod'].map((m) => (
                   <label
                     key={m}
                     className="d-flex align-items-center gap-2 mb-2"
@@ -208,11 +246,7 @@ export default function Checkout() {
                         letterSpacing: '0.05em'
                       }}
                     >
-                      {m === 'card'
-                        ? 'Card'
-                        : m === 'cod'
-                          ? 'Cash on Delivery (+$800)'
-                          : 'Online Bank Transfer'}
+                      Cash on Delivery
                     </span>
                   </label>
                 ))}
@@ -264,14 +298,6 @@ export default function Checkout() {
                 </div>
 
                 <div
-                  className="d-flex justify-content-between mb-2"
-                  style={{ color: '#000' }}
-                >
-                  <span>Payment fee</span>
-                  <span>{money(paymentFee)}</span>
-                </div>
-
-                <div
                   className="d-flex justify-content-between mb-3"
                   style={{ color: '#000' }}
                 >
@@ -287,12 +313,18 @@ export default function Checkout() {
                   {valid ? 'Place Order' : 'Fill required fields'}
                 </button>
 
+                <div className="mt-3" style={{ color: '#000', fontSize: '0.85rem' }}>
+                  <p className="mb-1">Pay with cash upon Delivery.</p>
+                  <p className="mb-1">Important Note: Please Confirm your order on WhatsApp after placing it to avoid delays.</p>
+                  <p className="mb-0">We will also send you a Confirmation Message on WhatsApp after your order is placed.</p>
+                </div>
+
                 {!valid && (
                   <small
                     className="d-block mt-2"
                     style={{ color: '#000' }}
                   >
-                    Address, country, city and phone are required.
+                    Address, town/city, state, postcode and phone are required.
                   </small>
                 )}
               </div>

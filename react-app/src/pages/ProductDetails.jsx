@@ -128,7 +128,7 @@ export default function ProductDetails() {
             <div className="product-fine-print">
               <div>Model details: 185cm architecture wearing dynamic size Medium</div>
               <div>Allocation value: Earn 240 Prestige Points on purchase</div>
-              <div>Logistics: Complimented delivery over $300 thresholds</div>
+              <div>Logistics: Complimented delivery over ₨83,400 thresholds</div>
               <div>Availability Index: {product.stock} units remain in workspace stock</div>
             </div>
           </div>

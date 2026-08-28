@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { deleteProduct, money } from '../../store';
+import { deleteProduct, money, getImages } from '../../store';
 import { useData } from '../../context/DataContext';
 
 export default function Products() {
@@ -20,7 +20,7 @@ export default function Products() {
             {products.map((p) => (
               <tr key={p.id}>
                 <td>{p.id}</td>
-                <td><img src={p.images?.[0]} alt="" style={{ width: 48, height: 60, objectFit: 'cover' }} /></td>
+                <td><img src={getImages(p)[0]} alt="" style={{ width: 48, height: 60, objectFit: 'cover' }} /></td>
                 <td>{p.name}</td>
                 <td>{p.gender}</td>
                 <td>{money(p.price)}</td>
