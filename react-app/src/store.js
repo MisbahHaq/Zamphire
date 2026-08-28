@@ -28,6 +28,22 @@ export function formatDate(iso) {
   return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) + ' · ' + d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
 }
 
+export const storeConfig = {
+  name: import.meta.env.VITE_STORE_NAME || 'Represent B',
+  iban: import.meta.env.VITE_STORE_IBAN || ''
+};
+
+export function generateBankQr(orderId, amount) {
+  if (!storeConfig.iban) return '';
+  const reference = `ORDER-${orderId}`;
+  return [
+    `Pay: ${storeConfig.name}`,
+    `IBAN: ${storeConfig.iban}`,
+    `Amount: ${money(amount)}`,
+    `Reference: ${reference}`
+  ].join('\n');
+}
+
 function esc(s) {
   return String(s == null ? '' : s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
