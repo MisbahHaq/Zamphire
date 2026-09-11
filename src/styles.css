@@ -613,6 +613,9 @@ body.product-detail-body { background-color: #e5e7eb; color: #000000; font-famil
 .profile-sidebar .btn-minimal:hover { background: #fff; color: #1a1a1a; }
 .profile-sidebar .checkout-section-title { color: #fff; }
 .profile-sidebar .text-caption { color: #ccc; }
+.profile-sidebar-light { color: #1a1a1a; }
+.profile-sidebar-light .text-caption { color: #888; }
+.profile-sidebar-light hr { border-color: #ddd; }
 .profile-summary { width: 100%; }
 @media (max-width: 991.98px) { .profile-sidebar { position: static; } }
 .profile-sidebar-btn { width: 100%; text-align: left; padding: 0.75rem 1rem; background: #0a0a0a; border: 1px solid #0d0d0d; color: #fff; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.08em; text-decoration: none; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }

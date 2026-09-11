@@ -29,16 +29,6 @@ export default function Checkout() {
   const [submitError, setSubmitError] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  if (items.length === 0) {
-    return (
-      <div className="checkout-page">
-        <div className="checkout-box"><p className="text-caption">Your bag is empty.</p></div>
-      </div>
-    );
-  }
-
-  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
-
   const deliveryFee = form.deliveryMethod === 'express' ? 500 : 0;
   const total = subtotal + deliveryFee;
 
@@ -50,6 +40,16 @@ export default function Checkout() {
       return '';
     }
   }, [form.paymentMethod, total]);
+
+  if (items.length === 0) {
+    return (
+      <div className="checkout-page">
+        <div className="checkout-box"><p className="text-caption">Your bag is empty.</p></div>
+      </div>
+    );
+  }
+
+  const set = (k) => (e) => setForm({ ...form, [k]: e.target.value });
 
   const valid = Boolean(
     form.address.trim() &&

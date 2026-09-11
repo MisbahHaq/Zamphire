@@ -65,12 +65,12 @@ export default function OrderConfirmation() {
         </div>
       )}
 
-      <div className="profile-sidebar mt-4 text-start" style={{ background: '#111', margin: '2rem auto', maxWidth: 520, color: '#fff' }}>
+      <div className="profile-sidebar profile-sidebar-light mt-4 text-start" style={{ background: '#fff', margin: '2rem auto', maxWidth: 520, color: '#000', border: '1px solid #ddd' }}>
         <div className="d-flex justify-content-between"><span className="text-caption">Status</span><span>{order.status}</span></div>
         <div className="d-flex justify-content-between"><span className="text-caption">Total</span><span>{money(order.totalAmount)}</span></div>
         <div className="d-flex justify-content-between"><span className="text-caption">Delivery</span><span>{order.deliveryMethod}</span></div>
         <div className="d-flex justify-content-between"><span className="text-caption">Payment</span><span>{paymentLabel}</span></div>
-        <hr style={{ borderColor: '#222' }} />
+        <hr style={{ borderColor: '#ddd' }} />
         {order.items.map((it, i) => (
           <div key={i} className="d-flex justify-content-between" style={{ fontSize: '0.8rem' }}>
             <span>{it.productName} × {it.quantity}</span>
