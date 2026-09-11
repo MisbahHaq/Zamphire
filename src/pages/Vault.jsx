@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function Vault() {
   return (
     <div className="vault-page">
@@ -8,7 +10,7 @@ export default function Vault() {
         <p style={{ maxWidth: 520, color: 'rgba(255,255,255,0.7)', fontSize: '0.85rem', lineHeight: 1.8 }}>
           A members-only archive of rare, limited-run pieces. New drops are released in small batches and never restocked.
         </p>
-        <a className="btn-vault" href="/">Back to Store</a>
+        <Link className="btn-vault" to="/">Back to Store</Link>
       </div>
     </div>
   );

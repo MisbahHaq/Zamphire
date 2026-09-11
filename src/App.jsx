@@ -1,32 +1,44 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect, lazy, Suspense } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
-import AdminLayout from './pages/admin/AdminLayout';
 
-import Home from './pages/Home';
-import Men from './pages/Men';
-import Women from './pages/Women';
-import Vault from './pages/Vault';
-import Search from './pages/Search';
-import ProductDetails from './pages/ProductDetails';
-import Cart from './pages/Cart';
-import Checkout from './pages/Checkout';
-import OrderConfirmation from './pages/OrderConfirmation';
-import Login from './pages/Login';
-import SignUp from './pages/SignUp';
-import Profile from './pages/Profile';
-import Bookmarks from './pages/Bookmarks';
+const Home = lazy(() => import('./pages/Home'));
+const Men = lazy(() => import('./pages/Men'));
+const Women = lazy(() => import('./pages/Women'));
+const Vault = lazy(() => import('./pages/Vault'));
+const Search = lazy(() => import('./pages/Search'));
+const ProductDetails = lazy(() => import('./pages/ProductDetails'));
+const Cart = lazy(() => import('./pages/Cart'));
+const Checkout = lazy(() => import('./pages/Checkout'));
+const OrderConfirmation = lazy(() => import('./pages/OrderConfirmation'));
+const Login = lazy(() => import('./pages/Login'));
+const SignUp = lazy(() => import('./pages/SignUp'));
+const Profile = lazy(() => import('./pages/Profile'));
+const Bookmarks = lazy(() => import('./pages/Bookmarks'));
 
-import AdminDashboard from './pages/admin/Dashboard';
-import AdminProducts from './pages/admin/Products';
-import AdminProductForm from './pages/admin/ProductForm';
-import AdminOrders from './pages/admin/Orders';
-import AdminOrderDetail from './pages/admin/OrderDetail';
-import AdminSupport from './pages/admin/Support';
+const AdminLayout = lazy(() => import('./pages/admin/AdminLayout'));
+const AdminDashboard = lazy(() => import('./pages/admin/Dashboard'));
+const AdminProducts = lazy(() => import('./pages/admin/Products'));
+const AdminProductForm = lazy(() => import('./pages/admin/ProductForm'));
+const AdminOrders = lazy(() => import('./pages/admin/Orders'));
+const AdminOrderDetail = lazy(() => import('./pages/admin/OrderDetail'));
+const AdminSupport = lazy(() => import('./pages/admin/Support'));
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 
 export default function App() {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Suspense fallback={<div className="route-fallback"><span className="route-fallback-spinner"></span></div>}>
+        <Routes>
       <Route element={<Layout />}>
         <Route path="/" element={<Home />} />
         <Route path="/men" element={<Men />} />
@@ -56,6 +68,8 @@ export default function App() {
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        </Routes>
+      </Suspense>
+    </>
   );
 }

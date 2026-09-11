@@ -428,7 +428,7 @@ img { max-width: 100%; }
 body.product-detail-body { background-color: #e5e7eb; color: #000000; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
 .editorial-wrapper { background-color: #e5e7eb; padding-bottom: 80px; overflow-x: hidden; }
 .product-hero-matrix { display: grid; grid-template-columns: 1.15fr 0.85fr; min-height: 90vh; gap: 0; }
-.media-gallery-pane { background-color: #f3f4f6; display: flex; flex-direction: row; justify-content: flex-start; align-items: flex-start; padding: 40px; position: relative; width: 100%; box-sizing: border-box; }
+.media-gallery-pane { background-color: #f3f4f6; display: flex; flex-direction: row; justify-content: flex-start; align-items: stretch; padding: 40px; position: relative; width: 100%; box-sizing: border-box; }
 .gallery-thumbs-column { display: flex; flex-direction: column; gap: 12px; width: 80px; flex-shrink: 0; margin-right: 24px; }
 .main-image-display-frame { width: 100%; height: 72vh; display: flex; align-items: center; justify-content: center; overflow: hidden; flex: 1; }
 .main-image-display-frame img { width: 100%; height: 100%; max-width: 100%; max-height: 100%; object-fit: contain; transition: opacity 0.4s ease; }
@@ -528,6 +528,11 @@ body.product-detail-body { background-color: #e5e7eb; color: #000000; font-famil
   .swiper-custom-navigation { position: static; justify-content: flex-end; margin: 0 0 14px 0; }
   .nav-arrow-box { width: 36px; height: 36px; }
 }
+
+/* ── App ── */
+.route-fallback { min-height: 60vh; display: flex; align-items: center; justify-content: center; }
+.route-fallback-spinner { width: 28px; height: 28px; border: 2px solid #ddd; border-top-color: #1a1c23; border-radius: 50%; animation: route-spin 0.7s linear infinite; }
+@keyframes route-spin { to { transform: rotate(360deg); } }
 
 /* ── Cart page ── */
 .cart-page-wrapper { font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; color: #000; background-color: #fff; padding-top: 2rem; padding-bottom: 5rem; }

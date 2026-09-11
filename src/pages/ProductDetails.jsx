@@ -20,7 +20,7 @@ export default function ProductDetails() {
 
   const images = useMemo(() => (product ? getImages(product) : []), [product]);
   const tags = useMemo(() => (product ? getTags(product) : []), [product]);
-  const sizes = useMemo(() => (tags.indexOf('accessories') !== -1 ? ['One Size'] : ['XS', 'S', 'M', 'L']), [tags]);
+  const sizes = useMemo(() => (tags.indexOf('accessories') !== -1 ? ['One Size'] : ['S', 'M', 'L']), [tags]);
 
   const [mainImage, setMainImage] = useState(images[0]);
   const [selectedSize, setSelectedSize] = useState('');
@@ -36,6 +36,11 @@ export default function ProductDetails() {
     }
   }, [id]);
 
+  const relatedProducts = useMemo(
+    () => (product ? products.filter((p) => p.gender === product.gender && p.id !== product.id).slice(0, 8) : []),
+    [products, product]
+  );
+
   if (!product) {
     return (
       <div className="editorial-wrapper" style={{ minHeight: '50vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -46,11 +51,6 @@ export default function ProductDetails() {
       </div>
     );
   }
-
-  const relatedProducts = useMemo(
-    () => products.filter((p) => p.gender === product.gender && p.id !== product.id).slice(0, 8),
-    [products, product]
-  );
 
   const updateCta = () => {
     if (selectedSize) return 'Add to Bag — ' + selectedSize;
@@ -118,7 +118,7 @@ export default function ProductDetails() {
               ))}
             </div>
 
-             <button className="velora-monolith-cta" onClick={onAddToBag}>{updateCta()}</button>
+            <button className="velora-monolith-cta" onClick={onAddToBag}>{updateCta()}</button>
 
             <div className="pd-shipping-note">
               <i className="bi bi-truck"></i> Free standard shipping on all orders.
