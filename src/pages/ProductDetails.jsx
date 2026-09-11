@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
-import { getImages, getTags, money } from '../store';
+import { getImages, getTags, money, storeConfig } from '../store';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
 import { useBookmarks } from '../context/BookmarkContext';
@@ -20,11 +20,12 @@ export default function ProductDetails() {
 
   const images = useMemo(() => (product ? getImages(product) : []), [product]);
   const tags = useMemo(() => (product ? getTags(product) : []), [product]);
-  const sizes = useMemo(() => (tags.indexOf('accessories') !== -1 ? ['One Size'] : ['S', 'M', 'L']), [tags]);
+  const sizes = useMemo(() => (tags.indexOf('accessories') !== -1 ? ['One Size'] : ['XS', 'S', 'M', 'L']), [tags]);
 
   const [mainImage, setMainImage] = useState(images[0]);
   const [selectedSize, setSelectedSize] = useState('');
   const [bookmarked, setBookmarked] = useState(product ? has(product.id) : false);
+  const [openAcc, setOpenAcc] = useState({ details: false, shipping: false, faq: false });
 
   useEffect(() => {
     if (product) {
@@ -52,8 +53,8 @@ export default function ProductDetails() {
   );
 
   const updateCta = () => {
-    if (selectedSize) return 'ADD TO BAG — ' + selectedSize;
-    return 'Select Size';
+    if (selectedSize) return 'Add to Bag — ' + selectedSize;
+    return 'Select A Size';
   };
 
   const onBookmark = (e) => {
@@ -72,31 +73,34 @@ export default function ProductDetails() {
     window.alert('Added to bag.');
   };
 
-  const [openAcc, setOpenAcc] = useState({ details: false, shipping: false });
-
   return (
     <div className="editorial-wrapper product-detail-body">
       <div className="product-hero-matrix">
         <div className="media-gallery-pane">
+          <div className="gallery-thumbs-column">
+            {images.length > 1 && (
+              <>
+                {images.map((src, i) => (
+                  <div key={i} className="thumb-frame-container" onClick={() => setMainImage(src)} style={{ outline: src === mainImage ? '1px solid #000' : 'none' }}>
+                    <img src={src} alt={`Asset ${i + 1}`} />
+                  </div>
+                ))}
+              </>
+            )}
+          </div>
           <div className="main-image-display-frame">
             <img src={mainImage} alt={product.name} id="mainProductImage" />
           </div>
-          {images.length > 1 && (
-            <div className="editorial-thumbnails-strip">
-              {images.map((src, i) => (
-                <div key={i} className="thumb-frame-container" onClick={() => setMainImage(src)} style={{ outline: src === mainImage ? '1px solid #000' : 'none' }}>
-                  <img src={src} alt={`Asset ${i + 1}`} />
-                </div>
-              ))}
-            </div>
-          )}
         </div>
 
         <div className="product-meta-editorial-pane">
           <div>
             <div className="meta-header-group">
               <div className="d-flex justify-content-between align-items-start" style={{ gap: 15 }}>
-                <h1>{product.name}</h1>
+                <div>
+                  <div className="pd-brand">{storeConfig.name}</div>
+                  <h1 style={{ margin: 0 }}>{product.name}</h1>
+                </div>
                 <button className="border-0 bg-transparent p-0" onClick={onBookmark} style={{ cursor: 'pointer', color: bookmarked ? '#000' : '#999', flexShrink: 0, marginTop: 5 }}>
                   <i className={`bi ${bookmarked ? 'bi-bookmark-fill' : 'bi-bookmark'}`} style={{ fontSize: '1.4rem' }}></i>
                 </button>
@@ -104,7 +108,10 @@ export default function ProductDetails() {
               <div className="editorial-price-badge">{money(product.price)}</div>
             </div>
 
-            <div className="section-editorial-caption">Size selection</div>
+            <div className="pd-size-row">
+              <div className="section-editorial-caption">Select Size</div>
+              <button className="pd-size-guide-link" onClick={() => setOpenAcc((o) => ({ ...o, faq: o.faq }))}>Size Guide</button>
+            </div>
             <div className="brutalist-option-grid">
               {sizes.map((s) => (
                 <button key={s} type="button" className={`brutalist-btn size-btn ${selectedSize === s ? 'selected-option' : ''}`} onClick={() => setSelectedSize(s)}>{s}</button>
@@ -113,26 +120,36 @@ export default function ProductDetails() {
 
              <button className="velora-monolith-cta" onClick={onAddToBag}>{updateCta()}</button>
 
-            <div className="product-fine-print">
-              <div>Model details: 185cm architecture wearing dynamic size Medium</div>
-              <div>Allocation value: Earn 240 Prestige Points on purchase</div>
-              <div>Logistics: Complimented delivery over ₨83,400 thresholds</div>
-              <div>Availability Index: {product.stock} units remain in workspace stock</div>
+            <div className="pd-shipping-note">
+              <i className="bi bi-truck"></i> Free standard shipping on all orders.
             </div>
           </div>
 
           <div className="editorial-accordion-divider">
             <div className="accordion-minimal-item">
               <button className="accordion-minimal-btn" onClick={() => setOpenAcc((o) => ({ ...o, details: !o.details }))}>
-                <span>Product Specifications</span><i className={`bi ${openAcc.details ? 'bi-dash-lg' : 'bi-plus-lg'}`}></i>
+                <span>Product Details</span><i className={`bi ${openAcc.details ? 'bi-dash-lg' : 'bi-plus-lg'}`}></i>
               </button>
-              <div className="accordion-minimal-content" style={{ maxHeight: openAcc.details ? 200 : 0 }}>{product.description}</div>
+              <div className="accordion-minimal-content" style={{ maxHeight: openAcc.details ? 200 : 0 }}>
+                <p>{product.description}</p>
+                {tags.length > 0 && <p><strong>Tags:</strong> {tags.join(', ')}</p>}
+              </div>
             </div>
             <div className="accordion-minimal-item">
               <button className="accordion-minimal-btn" onClick={() => setOpenAcc((o) => ({ ...o, shipping: !o.shipping }))}>
-                <span>Fulfillment & Returns</span><i className={`bi ${openAcc.shipping ? 'bi-dash-lg' : 'bi-plus-lg'}`}></i>
+                <span>Shipping and Returns</span><i className={`bi ${openAcc.shipping ? 'bi-dash-lg' : 'bi-plus-lg'}`}></i>
               </button>
-              <div className="accordion-minimal-content" style={{ maxHeight: openAcc.shipping ? 200 : 0 }}>Standard priority dispatch operations settle within 3-5 standard workspace business timelines. Returns are honored within a 30-day window frame.</div>
+              <div className="accordion-minimal-content" style={{ maxHeight: openAcc.shipping ? 200 : 0 }}>
+                <p>Standard delivery settles within 3-5 business days. Free shipping on all orders. Returns are honored within a 30-day window.</p>
+              </div>
+            </div>
+            <div className="accordion-minimal-item">
+              <button className="accordion-minimal-btn" onClick={() => setOpenAcc((o) => ({ ...o, faq: !o.faq }))}>
+                <span>FAQ</span><i className={`bi ${openAcc.faq ? 'bi-dash-lg' : 'bi-plus-lg'}`}></i>
+              </button>
+              <div className="accordion-minimal-content" style={{ maxHeight: openAcc.faq ? 200 : 0 }}>
+                <p>How do I choose my size? Refer to the size chart in the size guide for measurements. What is the return policy? Items can be returned within 30 days of delivery.</p>
+              </div>
             </div>
           </div>
         </div>
