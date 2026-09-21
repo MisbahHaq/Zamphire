@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
-const DEBUG_KEY = 'represent_route_debug_v1';
+const DEBUG_KEY = 'zamphire_route_debug_v1';
 function debugLog(msg) {
   try {
     const arr = JSON.parse(localStorage.getItem(DEBUG_KEY) || '[]');

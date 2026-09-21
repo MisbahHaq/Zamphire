@@ -297,10 +297,10 @@ img { max-width: 100%; }
 }
 
 /* ── Footer ── */
-.footer-represent h2 { font-size: 0.85rem; font-weight: 200; letter-spacing: 0.35em; text-transform: uppercase; }
-.footer-represent p { max-width: 340px; font-size: 0.8rem; font-weight: 300; color: #777; line-height: 1.8; letter-spacing: 0.03em; }
-.footer-represent ul li a { color: #888; }
-.footer-represent .foot-col-title { color: #555; }
+.footer-zamphire h2 { font-size: 0.85rem; font-weight: 200; letter-spacing: 0.35em; text-transform: uppercase; }
+.footer-zamphire p { max-width: 340px; font-size: 0.8rem; font-weight: 300; color: #777; line-height: 1.8; letter-spacing: 0.03em; }
+.footer-zamphire ul li a { color: #888; }
+.footer-zamphire .foot-col-title { color: #555; }
 
 /* ── Home Page ── */
 .home-page { --ink: #111111; --muted: #6b6258; --line: rgba(17, 17, 17, 0.12); --paper: #f7f4ee; --paper-2: #ffffff; --charcoal: #161616; background: var(--paper); color: var(--ink); overflow-x: hidden; }

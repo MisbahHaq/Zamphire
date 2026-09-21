@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// ── REPRESENT — Firestore security rules (DEV) ──
+// ── ZAMPHIRE — Firestore security rules (DEV) ──
 // NOTE: These are permissive dev rules. Before production, restrict
 // product/order/support writes to admin users (use Firebase Auth custom
 // claims or a `role` check against the users collection).

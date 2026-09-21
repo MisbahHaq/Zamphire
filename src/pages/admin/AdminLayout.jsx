@@ -19,7 +19,7 @@ export default function AdminLayout() {
   return (
     <div className="admin-layout">
       <aside className="admin-sidebar">
-        <div className="admin-brand">REPRESENT<span style={{ color: '#666' }}> / ADMIN</span></div>
+        <div className="admin-brand">ZAMPHIRE<span style={{ color: '#666' }}> / ADMIN</span></div>
         <nav className="admin-nav">
           {links.map((l) => (
             <NavLink key={l.to} to={l.to} end={l.end} className={({ isActive }) => 'admin-nav-link' + (isActive ? ' active' : '')}>

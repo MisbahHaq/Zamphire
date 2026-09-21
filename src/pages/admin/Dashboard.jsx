@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { money, formatDate, seedFirestore } from '../../store';
+import { money, formatDate } from '../../store';
 import { useData } from '../../context/DataContext';
 
 export default function Dashboard() {
   const { orders, products } = useData();
-  const [seeding, setSeeding] = useState(false);
-  const [seedMsg, setSeedMsg] = useState('');
 
   const revenue = orders.reduce((s, o) => s + o.totalAmount, 0);
   const pending = orders.filter((o) => o.status === 'Pending' || o.status === 'Processing').length;
@@ -20,22 +17,12 @@ export default function Dashboard() {
 
   const recent = [...orders].reverse().slice(0, 6);
 
-  const onSeed = async () => {
-    setSeeding(true);
-    setSeedMsg('');
-    const res = await seedFirestore();
-    setSeeding(false);
-    setSeedMsg(res.seeded ? 'Sample data seeded.' : ('Not seeded: ' + (res.reason || 'unknown')));
-  };
-
   return (
     <div className="admin-dashboard">
       <h1 className="admin-page-title">Dashboard</h1>
       <div className="d-flex justify-content-between align-items-center mb-3">
         <span className="text-caption">Manage your store from here.</span>
-        <button className="btn-minimal" disabled={seeding} onClick={onSeed}>{seeding ? 'Seeding…' : 'Seed sample data'}</button>
       </div>
-      {seedMsg && <p className="text-caption mb-3" style={{ color: '#9f9' }}>{seedMsg}</p>}
       <div className="admin-stat-grid">
         {stats.map((s) => (
           <Link key={s.label} to={s.to} className="admin-stat-card">

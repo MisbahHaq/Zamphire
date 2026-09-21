@@ -7,7 +7,7 @@ const GENDERS = ['Men', 'Women'];
 
 const empty = {
   name: '', gender: 'Men', price: '', description: '',
-  images: [''], tags: '', sizes: 'S,M,L,XL', stock: '10'
+  images: [''], tags: '', sizes: '50ml,100ml', stock: '10'
 };
 
 function fromProduct(p) {
@@ -87,7 +87,7 @@ export default function ProductForm() {
            <div className="col-6">{field('Price', 'price', 'number')}</div>
            <div className="col-6">{field('Stock', 'stock', 'number')}</div>
          </div>
-         {field('Sizes (comma separated)', 'sizes')}
+         {field('Bottle Sizes (ml, comma separated)', 'sizes')}
 
         <div className="auth-field mb-2">
           <label>Image URLs</label>

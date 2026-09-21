@@ -25,8 +25,8 @@ function authError(e) {
 }
 
 const AuthContext = createContext(null);
-const AUTH_CACHE = 'represent_auth_user_v1';
-const AUTH_DEBUG = 'represent_auth_debug_v1';
+const AUTH_CACHE = 'zamphire_auth_user_v1';
+const AUTH_DEBUG = 'zamphire_auth_debug_v1';
 
 function debugLog(msg) {
   try {

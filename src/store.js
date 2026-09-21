@@ -1,12 +1,12 @@
 // ═══════════════════════════════════════════════
-//  REPRESENT — Firebase backend (Firestore + Auth)
+//  ZAMPHIRE — Firebase backend (Firestore + Auth)
 //  Async data layer. Live collections are surfaced
 //  to React via the DataProvider (onSnapshot) and
 //  mutations are awaited writes to Firestore.
 // ═══════════════════════════════════════════════
 
 import {
-  collection, doc, getDoc, getDocs, setDoc, addDoc, updateDoc,
+  collection, doc, getDoc, setDoc, addDoc, updateDoc,
   deleteDoc, onSnapshot, query, where, orderBy, runTransaction, serverTimestamp
 } from 'firebase/firestore';
 import {
@@ -259,8 +259,8 @@ export function subscribeUsers(cb) {
 /* ---------- per-user cart / bookmarks / recent ---------- */
 
 function guestId() {
-  let id = localStorage.getItem('represent_guest');
-  if (!id) { id = 'guest_' + Math.random().toString(36).slice(2); localStorage.setItem('represent_guest', id); }
+  let id = localStorage.getItem('zamphire_guest');
+  if (!id) { id = 'guest_' + Math.random().toString(36).slice(2); localStorage.setItem('zamphire_guest', id); }
   return id;
 }
 
@@ -352,45 +352,4 @@ export async function pushRecent(uid, pid) {
   cur = cur.filter((x) => x !== Number(pid));
   cur.unshift(Number(pid));
   await setDoc(ref, { productIds: cur.slice(0, 8) }, { merge: true });
-}
-
-/* ---------- seed (dev/demo data) ---------- */
-
-const SEED_PRODUCTS = [
-  { id: 1, name: 'Signature Crew T-Shirt', price: 13622, stock: 120, gender: 'Men', description: 'An essential heavyweight cotton tee with a boxy, structured fit and tonal embroidered logo.', imageUrl: '/assets/acc.webp', imageUrls: '/assets/acc.webp, /assets/man.png, /assets/first-pic.png', tags: 'bestseller,essentials', colors: 'Black, White, Grey', rating: 4.5, reviews: 12, dateAdded: new Date().toISOString(), category: 'Tees', sizes: ['S', 'M', 'L', 'XL'] },
-  { id: 2, name: 'Oversized Box Logo Hoodie', price: 35862, stock: 80, gender: 'Men', description: 'Heavyweight brushed-back fleece hoodie with dropped shoulders and a clean box logo chest print.', imageUrl: '/assets/man.png', imageUrls: '/assets/man.png, /assets/second-pic-main.png, /assets/acc.webp', tags: 'new,bestseller', colors: 'Black, Navy', rating: 4.7, reviews: 9, dateAdded: new Date().toISOString(), category: 'Hoodies', sizes: ['S', 'M', 'L', 'XL'] },
-  { id: 3, name: 'Tailored Track Jacket', price: 52542, stock: 45, gender: 'Men', description: 'A sharp everyday jacket cut from a structured cotton blend, finished with concealed zip pockets.', imageUrl: '/assets/first-pic.png', imageUrls: '/assets/first-pic.png, /assets/woman.png, /assets/acc.webp', tags: 'new,outerwear', colors: 'Black, Olive', rating: 4.6, reviews: 5, dateAdded: new Date().toISOString(), category: 'Jackets', sizes: ['S', 'M', 'L', 'XL'] },
-  { id: 4, name: 'Straight Leg Denim Jean', price: 41422, stock: 60, gender: 'Men', description: 'Classic straight leg silhouette in a rigid 12oz Japanese selvedge denim with contrast stitching.', imageUrl: '/assets/second-pic-main.png', imageUrls: '/assets/second-pic-main.png, /assets/man.png', tags: 'bestseller,denim', colors: 'Indigo, Black', rating: 4.4, reviews: 7, dateAdded: new Date().toISOString(), category: 'Denim', sizes: ['S', 'M', 'L', 'XL'] },
-  { id: 5, name: 'Minimal Structured Cap', price: 10842, stock: 200, gender: 'Men', description: 'Six-panel cap with a curved brim, embroidered eyelets and an adjustable leather strap.', imageUrl: '/assets/vault.png', imageUrls: '/assets/vault.png, /assets/acc.webp', tags: 'accessories', colors: 'Black, White', rating: 4.8, reviews: 20, dateAdded: new Date().toISOString(), category: 'Accessories', sizes: ['One Size'] },
-  { id: 6, name: 'Ribbed Knit Fitted Top', price: 21962, stock: 90, gender: 'Women', description: 'Body-hugging ribbed knit top with a square neckline and subtle tonal stitch detailing.', imageUrl: '/assets/woman.png', imageUrls: '/assets/woman.png, /assets/acc.webp, /assets/vault.png', tags: 'new', colors: 'Beige, Black', rating: 4.5, reviews: 6, dateAdded: new Date().toISOString(), category: 'Tops', sizes: ['XS', 'S', 'M', 'L'] },
-  { id: 7, name: 'Fluid Wide-Leg Trouser', price: 38642, stock: 55, gender: 'Women', description: 'High-rise trousers in a fluid drape fabric with a wide leg and concealed side zip.', imageUrl: '/assets/woman.jpg', imageUrls: '/assets/woman.jpg, /assets/woman_main.webp, /assets/acc.webp', tags: 'bestseller', colors: 'Black, Sand', rating: 4.6, reviews: 8, dateAdded: new Date().toISOString(), category: 'Trousers', sizes: ['XS', 'S', 'M', 'L'] },
-  { id: 8, name: 'Tailored Single-Breasted Blazer', price: 60882, stock: 40, gender: 'Women', description: 'A sharp single-breasted blazer with structured shoulders, notch lapels and a soft-wool hand feel.', imageUrl: '/assets/woman_main.webp', imageUrls: '/assets/woman_main.webp, /assets/woman.png', tags: 'new,outerwear', colors: 'Black, Camel', rating: 4.7, reviews: 4, dateAdded: new Date().toISOString(), category: 'Blazers', sizes: ['XS', 'S', 'M', 'L'] },
-  { id: 9, name: 'Bias-Cut Slip Dress', price: 33082, stock: 70, gender: 'Women', description: 'Elegant bias-cut slip dress with adjustable straps and a fluid, column-like drape.', imageUrl: '/assets/acc.webp', imageUrls: '/assets/acc.webp, /assets/woman_main.webp, /assets/man.png', tags: 'bestseller', colors: 'Black, Ivory', rating: 4.5, reviews: 10, dateAdded: new Date().toISOString(), category: 'Dresses', sizes: ['XS', 'S', 'M', 'L'] },
-  { id: 10, name: 'Structured Shoulder Bag', price: 52542, stock: 30, gender: 'Women', description: 'Sculpted leather shoulder bag with a rigid base, magnetic flap and gold-tone hardware.', imageUrl: '/assets/vault.png', imageUrls: '/assets/vault.png, /assets/acc.webp, /assets/woman.png', tags: 'accessories', colors: 'Black, Tan', rating: 4.9, reviews: 15, dateAdded: new Date().toISOString(), category: 'Bags', sizes: ['One Size'] },
-  { id: 11, name: 'Vault Archive Logo Tee', price: 26410, stock: 15, gender: 'Men', description: 'A vault-exclusive reissue of the first logo tee from the archive collection. Limited run.', imageUrl: '/assets/vault.png', imageUrls: '/assets/vault.png, /assets/first-pic.png', tags: 'vault,limited', colors: 'Black', rating: 5.0, reviews: 3, dateAdded: new Date().toISOString(), category: 'Tees', sizes: ['S', 'M', 'L', 'XL'] },
-  { id: 12, name: 'Limited Coach Jacket', price: 69222, stock: 12, gender: 'Men', description: 'A numbered-release coach jacket in a waxed cotton shell with hidden snap closure.', imageUrl: '/assets/first-pic.png', imageUrls: '/assets/first-pic.png, /assets/man.png, /assets/vault.png', tags: 'vault,new,limited', colors: 'Black', rating: 4.8, reviews: 2, dateAdded: new Date().toISOString(), category: 'Jackets', sizes: ['S', 'M', 'L', 'XL'] }
-];
-
-const SEED_ORDERS = [
-  { id: 1, userEmail: 'customer@demo.com', userId: '', address: '14 Baker Street, London, UK', country: 'United Kingdom', city: 'London', phoneNumber: '+44 7700 900123', orderDate: '2026-06-02T10:30:00.000Z', status: 'Delivered', deliveryMethod: 'standard', paymentMethod: 'card', totalAmount: 27244, items: [{ productId: 1, productName: 'Signature Crew T-Shirt', quantity: 2, price: 13622, imageUrl: '/assets/acc.webp', size: 'M', color: 'Black' }, { productId: 5, productName: 'Minimal Structured Cap', quantity: 1, price: 10842, imageUrl: '/assets/vault.png', size: 'One Size', color: 'Black' }] },
-  { id: 2, userEmail: 'customer@demo.com', userId: '', address: '14 Baker Street, London, UK', country: 'United Kingdom', city: 'London', phoneNumber: '+44 7700 900123', orderDate: '2026-07-12T15:45:00.000Z', status: 'Out for Delivery', deliveryMethod: 'express', paymentMethod: 'card', totalAmount: 52542, items: [{ productId: 3, productName: 'Tailored Track Jacket', quantity: 1, price: 52542, imageUrl: '/assets/first-pic.png', size: 'L', color: 'Black' }] },
-  { id: 3, userEmail: 'customer@demo.com', userId: '', address: '14 Baker Street, London, UK', country: 'United Kingdom', city: 'London', phoneNumber: '+44 7700 900123', orderDate: '2026-08-04T09:20:00.000Z', status: 'Pending', deliveryMethod: 'standard', paymentMethod: 'cod', totalAmount: 55044, items: [{ productId: 9, productName: 'Bias-Cut Slip Dress', quantity: 1, price: 33082, imageUrl: '/assets/acc.webp', size: 'S', color: 'Ivory' }, { productId: 6, productName: 'Ribbed Knit Fitted Top', quantity: 1, price: 21962, imageUrl: '/assets/woman.png', size: 'M', color: 'Beige' }] },
-  { id: 4, userEmail: 'customer@demo.com', userId: '', address: '14 Baker Street, London, UK', country: 'United Kingdom', city: 'London', phoneNumber: '+44 7700 900123', orderDate: '2026-05-18T11:05:00.000Z', status: 'Cancelled', deliveryMethod: 'standard', paymentMethod: 'card', totalAmount: 26410, items: [{ productId: 11, productName: 'Vault Archive Logo Tee', quantity: 1, price: 26410, imageUrl: '/assets/vault.png', size: 'M', color: 'Black' }] },
-  { id: 5, userEmail: 'sara@demo.com', userId: '', address: '221 Rue de Rivoli, Paris, France', country: 'France', city: 'Paris', phoneNumber: '+33 6 12 34 56 78', orderDate: '2026-07-28T13:10:00.000Z', status: 'Order Received', deliveryMethod: 'standard', paymentMethod: 'card', totalAmount: 113424, items: [{ productId: 8, productName: 'Tailored Single-Breasted Blazer', quantity: 1, price: 60882, imageUrl: '/assets/woman_main.webp', size: 'M', color: 'Black' }, { productId: 10, productName: 'Structured Shoulder Bag', quantity: 1, price: 52542, imageUrl: '/assets/vault.png', size: 'One Size', color: 'Tan' }] }
-];
-
-const SEED_SUPPORT = [
-  { id: 1, orderId: 2, requestType: 'AdminChat', customerName: 'Mark Johnson', customerEmail: 'customer@demo.com', message: 'Can I change my delivery address for order #2?', reason: '', status: 'Resolved', isRead: true, createdAt: '2026-07-13T09:00:00.000Z', updatedAt: '2026-07-13T12:15:00.000Z', adminResponse: 'Hi Mark — we have updated the address to your office. Delivery will be slightly delayed.' },
-  { id: 2, orderId: 4, requestType: 'Cancellation', customerName: 'Mark Johnson', customerEmail: 'customer@demo.com', message: 'Cancellation requested for order #4. Reason: Changed my mind about the colour.', reason: 'Changed my mind about the colour.', status: 'Resolved', isRead: true, createdAt: '2026-05-19T10:00:00.000Z', updatedAt: '2026-05-19T16:40:00.000Z', adminResponse: 'Your order has been cancelled and the refund has been initiated.' },
-  { id: 3, orderId: null, requestType: 'AdminChat', customerName: 'Sara Malik', customerEmail: 'sara@demo.com', message: 'Do you have the Tailored Single-Breasted Blazer in a size M?', reason: '', status: 'New', isRead: false, createdAt: '2026-08-08T18:25:00.000Z', updatedAt: null, adminResponse: '' }
-];
-
-export async function seedFirestore() {
-  const snap = await getDocs(collection(db, 'products'));
-  if (!snap.empty) return { seeded: false, reason: 'products already exist' };
-  for (const p of SEED_PRODUCTS) await setDoc(doc(db, 'products', String(p.id)), p);
-  for (const o of SEED_ORDERS) await setDoc(doc(db, 'orders', String(o.id)), o);
-  for (const s of SEED_SUPPORT) await setDoc(doc(db, 'support', String(s.id)), s);
-  await setDoc(doc(db, 'counters', 'seq'), { productSeq: 12, orderSeq: 5, supportSeq: 3 }, { merge: true });
-  return { seeded: true };
 }

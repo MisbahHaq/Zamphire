@@ -22,7 +22,7 @@ export default function Home() {
         </div>
         <div className="home-hero-visual-grid">
           <div className="hero-visual-card hero-visual-card-large">
-            <img src="/assets/Perfume-13.jpg" alt="Zamphire editorial fashion look" loading="eager" />
+            <img src="/assets/Perfume-13.jpg" alt="Zamphire editorial fragrance look" loading="eager" />
           </div>
           <div className="hero-visual-card">
             <img src="/assets/Perfume-8.jpg" alt="Zamphire men collection" loading="lazy" />

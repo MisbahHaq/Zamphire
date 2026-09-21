@@ -1,6 +1,6 @@
-# Zamphire — Represent e-commerce storefront
+# Zamphire — Perfume e-commerce storefront
 
-A single-directory React (Vite) storefront deployed to Netlify, backed by Firebase (Firestore + Auth). The standalone `sendkardo-qr` Raast QR package is vendored in as `src/lib/sendkardo-qr` for easy in-app use.
+A single-directory React (Vite) perfume storefront deployed to Netlify, backed by Firebase (Firestore + Auth). The standalone `sendkardo-qr` Raast QR package is vendored in as `src/lib/sendkardo-qr` for easy in-app use.
 
 ## Run locally
 

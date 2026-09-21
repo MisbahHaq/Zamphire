@@ -20,7 +20,10 @@ export default function ProductDetails() {
 
   const images = useMemo(() => (product ? getImages(product) : []), [product]);
   const tags = useMemo(() => (product ? getTags(product) : []), [product]);
-  const sizes = useMemo(() => (tags.indexOf('accessories') !== -1 ? ['One Size'] : ['S', 'M', 'L']), [tags]);
+  const sizes = useMemo(
+    () => (product && product.sizes && product.sizes.length ? product.sizes : (tags.indexOf('accessories') !== -1 ? ['One Size'] : ['S', 'M', 'L'])),
+    [product, tags]
+  );
 
   const [mainImage, setMainImage] = useState(images[0]);
   const [selectedSize, setSelectedSize] = useState('');
@@ -109,7 +112,7 @@ export default function ProductDetails() {
             </div>
 
             <div className="pd-size-row">
-              <div className="section-editorial-caption">Select Size</div>
+              <div className="section-editorial-caption">Select Bottle Size</div>
               <button className="pd-size-guide-link" onClick={() => setOpenAcc((o) => ({ ...o, faq: o.faq }))}>Size Guide</button>
             </div>
             <div className="brutalist-option-grid">
@@ -148,7 +151,7 @@ export default function ProductDetails() {
                 <span>FAQ</span><i className={`bi ${openAcc.faq ? 'bi-dash-lg' : 'bi-plus-lg'}`}></i>
               </button>
               <div className="accordion-minimal-content" style={{ maxHeight: openAcc.faq ? 200 : 0 }}>
-                <p>How do I choose my size? Refer to the size chart in the size guide for measurements. What is the return policy? Items can be returned within 30 days of delivery.</p>
+                <p>Which size should I choose? The smaller bottles are ideal for travel while larger sizes give the best value per ml. How should I apply? Spray on pulse points — wrists, neck and behind the ears — for the best projection. What is the return policy? Fragrances can be returned within 30 days of delivery if unopened and in original packaging.</p>
               </div>
             </div>
           </div>
