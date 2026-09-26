@@ -1,6 +1,6 @@
 # Zamphire — Perfume e-commerce storefront
 
-Zamphire is a single-page React (Vite) perfume storefront for the Pakistani market. It ships with a customer storefront, an admin dashboard for managing products/orders/support, and Raast (EMVCo) QR payments — all backed by Firebase (Firestore + Auth) and deployed to Netlify.
+Zamphire is a React (Vite) perfume storefront for the Pakistani market. It ships with a customer storefront, an admin dashboard for managing products/orders/support, and Raast (EMVCo) QR payments — all backed by Firebase (Firestore + Auth) and deployed to Netlify.
 
 ## Features
 
